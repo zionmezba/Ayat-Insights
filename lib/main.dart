@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'hex_color.dart';
 import 'quote.dart';
+import 'quote_card.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -15,8 +17,8 @@ class AyatLists extends StatefulWidget {
 }
 
 class _AyatListsState extends State<AyatLists> {
-  Color bar_color = HexColor("FFD684");
-  Color bg_color = HexColor("FBE5B1");
+  Color barColor = HexColor("FFD684");
+  Color bgColor = HexColor("FBE5B1");
 
   List<Quote> ayatIns = [
     Quote(
@@ -35,61 +37,22 @@ class _AyatListsState extends State<AyatLists> {
         source: "(Bukhari & Muslim)"),
   ];
 
-  Widget quoteTemplate(quote) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(16, 16, 16, 0),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              quote.text,
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.black,
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              quote.source,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[600],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bg_color,
+      backgroundColor: bgColor,
       appBar: AppBar(
         title: Text("Ayat & Insights"),
         centerTitle: true,
-        backgroundColor: bar_color,
+        backgroundColor: barColor,
       ),
       body: Column(
-        children: ayatIns.map((quote) => quoteTemplate(quote)).toList(),
+        children: ayatIns.map((quote) => QuoteCard(quote: quote)).toList(),
       ),
     );
   }
 }
 
-class HexColor extends Color {
-  static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll("#", "");
-    if (hexColor.length == 6) {
-      hexColor = "FF" + hexColor;
-    }
-    return int.parse(hexColor, radix: 16);
-  }
 
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
-}
+
+
