@@ -47,7 +47,14 @@ class _AyatListsState extends State<AyatLists> {
         backgroundColor: barColor,
       ),
       body: Column(
-        children: ayatIns.map((quote) => QuoteCard(quote: quote)).toList(),
+        children: ayatIns.map((quote) => QuoteCard(
+            quote: quote,
+          favourite: () {
+              setState(() {
+                  Icons.favorite_outline_rounded; // Change to your desired icon
+              });
+          }
+        )).toList(),
       ),
     );
   }
